@@ -1,4 +1,6 @@
+from pprint import pprint
 import requests
+from bs4 import BeautifulSoup
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -12,6 +14,8 @@ import time
 
 # Setup options
 option = Options()
+# option.add_argument('--incognito')
+# option.add_argument('--window-size=1910x1080')
 option.add_argument('disable-infobars')
 option.add_argument('disable-extensions')
 option.add_argument('disable-gpu')
@@ -37,6 +41,10 @@ search_box.send_keys(search_keyword)
 # Choose to show 50 items per load
 browser.find_element(By.ID, 'a_list_cnt').click()
 browser.find_element(By.XPATH, '//*[@id="contents"]/main/section/div[2]/div[2]/div[2]/div[5]/ul/li[5]/a').click()
+'''
+bsObj = BeautifulSoup(browser, "html.parser")
+print(bsObj)
+'''
 
 time.sleep(30)
 
@@ -44,3 +52,5 @@ end_page_num = 11
 for i in range(1, end_page_num):
     browser.find_element(By.XPATH, '//*[@id="contents"]/main/section/div[2]/div[3]/div/ul/li[7]').click()
     time.sleep(20)
+    elements = browser.find_elements(By.ID, 'tbody')
+    print(elements)
