@@ -16,6 +16,7 @@ import time
 
 items = []  # save the item infos
 last_key = 0  # save the identification number of the last item saved
+item_count = 0
 
 
 def table_to_lst(out_lst, in_elements):
@@ -47,7 +48,7 @@ def table_to_lst(out_lst, in_elements):
                 else:
                     pass
                 new_item = []
-    pprint(items)
+    # pprint(items)
     return out_lst
 
 
@@ -57,7 +58,9 @@ writer = csv.writer(f)
 
 def items_to_csv():
     global items
+    global item_count
     writer.writerows(items)
+    item_count += len(items)
 
 
 # Setup options
@@ -120,6 +123,6 @@ for i in range(1, end_page_num):
 
 
 
-pprint(items)
-print('total number of items searched is :' + str(len(items)))
+# pprint(items)
+print('total number of items searched is :' + str(item_count))
 f.close()
